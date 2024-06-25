@@ -25,7 +25,7 @@ async function userSignInController(req, res) {
 
       const tokenOption = {
         httpOnly: true,
-        sameSite: 'Lax', // Mặc định là 'Lax', có thể điều chỉnh cho phù hợp
+        sameSite: 'None', // Mặc định là 'Lax', có thể điều chỉnh cho phù hợp
       };
 
       // Điều chỉnh điều kiện để chỉ đặt secure=true khi chạy trên HTTPS
