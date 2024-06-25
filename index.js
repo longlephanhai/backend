@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 app.use("/api", router)
 const PORT = 8080 || process.env.PORT
-app.get("/", (req, res) => {
+app.get("https://backend-cosmetics.onrender.com", (req, res) => {
     res.send("API Working");
 });
 
