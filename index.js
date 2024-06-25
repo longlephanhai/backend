@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser())
 app.use("/api", router)
 const PORT = 8080 || process.env.PORT
-
+app.send("backend")
 connectDB().then(() => {
     app.listen(PORT, () => {
         console.log("connect to DB")
