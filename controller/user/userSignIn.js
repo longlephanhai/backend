@@ -26,12 +26,13 @@ async function userSignInController(req, res) {
       const tokenOption = {
         httpOnly: true,
         sameSite: 'None', // Mặc định là 'Lax', có thể điều chỉnh cho phù hợp
+        secure:true
       };
 
-      // Điều chỉnh điều kiện để chỉ đặt secure=true khi chạy trên HTTPS
-      if (process.env.NODE_ENV === 'production') {
-        tokenOption.secure = true;
-      }
+      // // Điều chỉnh điều kiện để chỉ đặt secure=true khi chạy trên HTTPS
+      // if (process.env.NODE_ENV === 'production') {
+      //   tokenOption.secure = true;
+      // }
 
       res.cookie("token", token, tokenOption).status(200).json({
         message: "Login successfully",
