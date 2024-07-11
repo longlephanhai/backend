@@ -7,13 +7,9 @@ async function userSignUpController(req,res){
         const { email, password, name} = req.body
 
         const user = await userModel.findOne({email})
-
-        // console.log("user",user)
-
         if(user){
             throw new Error("Already user exits.")
         }
-
         if(!email){
            throw new Error("Please provide email")
         }
@@ -23,31 +19,25 @@ async function userSignUpController(req,res){
         if(!name){
             throw new Error("Please provide name")
         }
-
         const salt = bcrypt.genSaltSync(10);
         const hashPassword = await bcrypt.hashSync(password, salt);
 
         if(!hashPassword){
             throw new Error("Something is wrong")
         }
-
         const payload = {
             ...req.body,
-            role : "GENERAL",
+            role : "USER",
             password : hashPassword
         }
-
         const userData = new userModel(payload)
         const saveUser = await userData.save()
-
         res.status(201).json({
             data : saveUser,
             success : true,
             error : false,
             message : "User created Successfully!"
         })
-
-
     }catch(err){
         res.json({
             message : err.message || err  ,
@@ -56,5 +46,4 @@ async function userSignUpController(req,res){
         })
     }
 }
-
 module.exports = userSignUpController
