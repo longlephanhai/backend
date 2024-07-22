@@ -37,7 +37,11 @@ const listLikeProduct = require('../controller/user/listLike')
 const listLikeView = require('../controller/user/listLikeView')
 const countProductFavorite = require('../controller/user/countProductFavorite')
 const deleteFavoriteProduct = require('../controller/user/deleteFavoriteProduct')
+const userConfirmController = require('../controller/user/userConfirmController')
+const forgotPassword = require('../controller/user/forgotPassword')
+const resetPassword = require('../controller/user/resetPassword')
 router.post("/signup", userSignUpController)
+router.get('/confirm/:token', userConfirmController);
 router.post("/signin", userSignInController)
 router.get("/user-details", authToken, userDetailsController)
 router.get("/userLogout", userLogout)
@@ -79,4 +83,8 @@ router.post("/favorite",authToken,listLikeProduct)
 router.post("/listfavorite",authToken,listLikeView)
 router.get("/count-favorite",authToken,countProductFavorite)
 router.post("/deletefavorite",authToken,deleteFavoriteProduct)
+
+
+router.post("/forgot-password",forgotPassword)
+router.post('/reset-password/:token',resetPassword)
 module.exports = router

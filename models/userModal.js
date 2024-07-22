@@ -10,7 +10,12 @@ const userSchema = mongoose.Schema({
     password: String,
     profilePic: String,
     role: String,
-    cartData: { type: Object, default: {} }
+    cartData: { type: Object, default: {} },
+    confirmationToken: String,
+    isConfirmed: {
+        type: Boolean,
+        default: false
+    }
 }, {
     timestamps: true
 })
