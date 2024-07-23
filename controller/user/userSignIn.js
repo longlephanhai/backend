@@ -30,7 +30,7 @@ async function userSignInController(req, res) {
       };
 
       // Điều chỉnh điều kiện để chỉ đặt secure=true khi chạy trên HTTPS
-      if (process.env.NODE_ENV === 'production') {
+      if (process.env.NODE_ENV === 'development') {
         tokenOption.secure = true;
       }
 
