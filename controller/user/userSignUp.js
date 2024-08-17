@@ -6,7 +6,7 @@ async function userSignUpController(req, res) {
     try {
         const { email, password, name } = req.body
 
-        const user = await userModel.findOne({ email })
+        const user = await userModel.findOne({ email }).sort({createdAt:-1})
         if (user) {
             throw new Error("Already user exits.")
         }

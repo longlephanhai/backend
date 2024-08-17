@@ -1,11 +1,11 @@
 const userModel = require("../models/userModal")
 
-const uploadProductPermission= async (userId)=>{
-    const user=await userModel.findById(userId)
-    if(user.role!=='ADMIN'){
+const uploadProductPermission = async (userId) => {
+    const user = await userModel.findById(userId)
+    if (user.role !== 'ADMIN') {
         return false
     }
     return false
 }
 
-module.exports=uploadProductPermission
+module.exports = uploadProductPermission
