@@ -2,29 +2,31 @@ const postModel = require('../../models/post');
 
 const likePost = async (req, res) => {
   try {
-    const { userId, idPost, liked } = req.body
-    console.log("user", userId);
-    console.log("idpost", idPost);
-    console.log("liked", liked);
-
-    const data = await postModel.findById({ _id: idPost })
-    if (liked === true) {
-      data.userLike.push(userId)
-      data.like += 1
-      data.liked = liked
-    } else {
-      data.userLike.pop(userId)
-      data.like -= 1
-      data.liked = liked
+    const { userId, idPost, liked } = req.body;
+    const post = await postModel.findById(idPost);
+    if (!post) {
+      return res.status(404).json({ message: 'Post not found', success: false, error: true });
     }
-    await data.save()
+    if (liked) {
+      if (!post.userLike.includes(userId)) {
+        post.userLike.push(userId);
+        post.like += 1;
+      }
+    } else {
+      if (post.userLike.includes(userId)) {
+        post.userLike.pull(userId);
+        post.like -= 1;
+      }
+    }
+    post.liked = post.userLike.includes(userId);
+    await post.save();
     res.json({
-      data: data,
+      data: post,
       success: true,
       error: false
-    })
+    });
   } catch (error) {
-    res.json({
+    res.status(500).json({
       message: error.message,
       success: false,
       error: true

@@ -12,6 +12,8 @@ async function userSignInController(req, res) {
       throw new Error("Please provide password");
     }
     const user = await userModel.findOne({ email });
+
+
     if (!user) {
       throw new Error("User not found");
     }
@@ -40,6 +42,14 @@ async function userSignInController(req, res) {
         success: true,
         error: false
       });
+
+      await userModel.updateOne({ _id: user.id }, {
+        statusOnline: "online"
+      })
+
+      _io.once('connection', (socket) => {
+        socket.broadcast.emit("SERVER_RETURN_USER_ONLINE", user.id)
+      })
 
     } else {
       throw new Error("Please check Password");

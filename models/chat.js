@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const chatSchema = mongoose.Schema({
   userId: String,
   content: String,
-  image:String,
+  image: String,
   name: String,
   profilePic: String,
   toUser: {

@@ -1,9 +1,8 @@
 const postModel = require("../../models/post");
 
-const getPostById = async (req, res) => {
+const getPostByParam = async (req, res) => {
   try {
-
-    const data = await postModel.find({ userId: req?.body?._id })
+    const data = await postModel.find({ userId: req.params.id })
     res.json({
       data: data,
       success: true,
@@ -17,4 +16,4 @@ const getPostById = async (req, res) => {
     })
   }
 }
-module.exports = getPostById;
+module.exports = getPostByParam

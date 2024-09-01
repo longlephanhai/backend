@@ -11,7 +11,7 @@ const postSchema = mongoose.Schema({
     accept: { type: Boolean, default: false },
     userLike: [{
         ref: "user",
-        type: String
+        type: mongoose.Schema.Types.ObjectId,
     }]
 }, {
     timestamps: true

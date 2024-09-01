@@ -4,9 +4,7 @@ const nodemailer = require('nodemailer');
 const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    console.log("email", email);
     const user = await userModel.findOne({ email })
-    console.log("user", user);
     if (!user) {
       return res.status(404).json({
         message: 'User not found.'
@@ -39,11 +37,11 @@ const forgotPassword = async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    res.status(200).json({ 
+    res.status(200).json({
       message: 'Password reset email sent.',
-      success:true,
+      success: true,
       error: false
-     });
+    });
   } catch (error) {
     res.json({
       message: error.message,

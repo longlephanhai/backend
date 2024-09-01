@@ -3,10 +3,10 @@ async function userDetailsController(req, res) {
     try {
         const user = await userModel.findById(req.userId)
         res.status(200).json({
-            data:user,
-            error:false,
-            success:true,
-            message:"User details"
+            data: user,
+            error: false,
+            success: true,
+            message: "User details"
         })
         // console.log("user",user)
     } catch (error) {

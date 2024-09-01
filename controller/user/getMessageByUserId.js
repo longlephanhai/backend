@@ -8,7 +8,7 @@ const getMessageByUserId = async (req, res) => {
 
     const data1 = await chatModel.find({ userId: id })
     const data2 = await chatModel.find({ toUser: id })
-    const profile=await userModel.findById(id)
+    const profile = await userModel.findById(id)
     // console.log("data1",data1);
     // console.log("data2",data2);
     const data = data1.concat(data2);
@@ -18,7 +18,7 @@ const getMessageByUserId = async (req, res) => {
 
     res.json({
       data: data,
-      profile:profile,
+      profile: profile,
       success: true,
       error: false
     })
