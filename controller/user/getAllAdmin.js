@@ -4,7 +4,7 @@ const getAllAmin = async (req, res) => {
   try {
     const data = await userModel.find({ role: "ADMIN" })
     res.json({
-      data: data[3],
+      data: data[0],
       success: true,
       error: false
     })

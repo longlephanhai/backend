@@ -250,7 +250,6 @@ const setupSocketEvents = async (io) => {
       socket.broadcast.emit("SERVER_RETURN_TYPING_FRIEND", data)
     })
   });
-
 };
 
 module.exports = setupSocketEvents;
