@@ -39,6 +39,6 @@ connectDB().then(() => {
     //     console.log("server is running")
     // })
     server.listen(PORT, () => {
-        console.log("server connect")
+        console.log("server connect", PORT)
     })
 })
