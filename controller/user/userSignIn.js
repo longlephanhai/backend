@@ -12,10 +12,10 @@ async function userSignInController(req, res) {
       throw new Error("Please provide password");
     }
     const user = await userModel.findOne({ email });
-
-
     if (!user) {
       throw new Error("User not found");
+    } else if (user.isConfirmed === false) {
+      throw new Error("Please confirm your email address");
     }
     const checkPassword = await bcrypt.compare(password, user.password);
     if (checkPassword) {

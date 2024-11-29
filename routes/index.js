@@ -65,6 +65,8 @@ const chatWithFriend = require('../controller/user/chat')
 const getOneFriend = require('../controller/user/getOneFriend')
 const locationMap = require('../controller/user/locationMap')
 const googleLogin = require('../controller/user/googleLogin')
+const checkCodeId = require('../controller/user/checkCodeId')
+const retryActive = require('../controller/user/retryActive')
 router.post("/signup", userSignUpController)
 router.get('/confirm/:token', userConfirmController);
 router.post("/signin", userSignInController)
@@ -144,4 +146,7 @@ router.get("/chat-with-friend/:roomChatId", authToken, chatWithFriend)
 router.post("/get-one-friend", authToken, getOneFriend)
 router.post("/location", authToken, locationMap)
 router.post("/google-login",googleLogin)
+
+router.post("/check-code", checkCodeId)
+router.post("/retry-active",retryActive)
 module.exports = router

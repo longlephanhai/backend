@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+const { v4: uuidv4 } = require('uuid');
 const userSchema = mongoose.Schema({
   name: String,
   email: {
@@ -25,7 +25,12 @@ const userSchema = mongoose.Schema({
   isConfirmed: {
     type: Boolean,
     default: false
-  }
+  },
+  uuid: {
+    type: String,
+    default: uuidv4()
+  },
+  codeExpired: Date
 }, {
   timestamps: true
 })

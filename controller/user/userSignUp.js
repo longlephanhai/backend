@@ -2,6 +2,8 @@ const userModel = require("../../models/userModal")
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const crypto = require('crypto')
+const { v4: uuidv4 } = require('uuid');
+const dayjs = require('dayjs');
 async function userSignUpController(req, res) {
   try {
     const { email, password, name } = req.body
@@ -12,7 +14,7 @@ async function userSignUpController(req, res) {
         // throw new Error("This email is already registered with google. Please login with google.")
         const hashPassword = await bcrypt.hashSync(password, 10);
         const confirmationToken = crypto.randomBytes(32).toString('hex');
-        await userModel.updateOne({ email }, { password: hashPassword, confirmationToken, isConfirmed: false })
+        await userModel.updateOne({ email }, { password: hashPassword, confirmationToken, isConfirmed: true })
         res.status(201).json({
           data: user,
           success: true,
@@ -44,7 +46,8 @@ async function userSignUpController(req, res) {
       role: "USER",
       password: hashPassword,
       confirmationToken,
-      isConfirmed: false
+      isConfirmed: false,
+      codeExpired: dayjs().add(5, 'minutes'),
     }
     const userData = new userModel(payload)
     const saveUser = await userData.save()
@@ -64,6 +67,7 @@ async function userSignUpController(req, res) {
     })
   }
 }
+
 const sendConfirmationEmail = (user) => {
   const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -79,8 +83,8 @@ const sendConfirmationEmail = (user) => {
     subject: 'Registration Successful',
     html: `
         <p>Hello ${user.name},</p>
-        <p>Please <a href="${process.env.FRONTEND_URL}/login">click here</a> to confirm your account.</p>
-        <p>Best Regards,<br>LTQ</p>
+        <p>Please nhập mã sau để xác thực tài khoản :</p>
+        <p>${user.uuid}</p>
     `
   };
   transporter.sendMail(mailOptions, (error, info) => {
