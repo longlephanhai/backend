@@ -19,7 +19,7 @@ const placeOrder = async (req, res) => {
         await addToCartModel.deleteMany({ userId: req.body.userId });
         const line_items = req.body.items.map((item) => ({
             price_data: {
-                currency: "usd",
+                currency: "vnd",
                 product_data: {
                     name: item.productName
                 },
@@ -29,11 +29,11 @@ const placeOrder = async (req, res) => {
         }))
         line_items.push({
             price_data: {
-                currency: "usd",
+                currency: "vnd",
                 product_data: {
-                    name: "Delivery Changes"
+                    name: "Phí vận chuyển"
                 },
-                unit_amount: 2 * 100
+                unit_amount: 2 * 1000
             },
             quantity: 1
         })

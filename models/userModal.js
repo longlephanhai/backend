@@ -17,6 +17,7 @@ const userSchema = mongoose.Schema({
   requestFriends: Array, // những người B gửi yêu cầu
   statusOnline: String,
   password: String,
+  googleId: String,
   profilePic: String,
   role: String,
   cartData: { type: Object, default: {} },

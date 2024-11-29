@@ -63,6 +63,8 @@ const acceptFriends = require('../controller/user/acceptFriend')
 const listFriends = require('../controller/user/listFriend')
 const chatWithFriend = require('../controller/user/chat')
 const getOneFriend = require('../controller/user/getOneFriend')
+const locationMap = require('../controller/user/locationMap')
+const googleLogin = require('../controller/user/googleLogin')
 router.post("/signup", userSignUpController)
 router.get('/confirm/:token', userConfirmController);
 router.post("/signin", userSignInController)
@@ -139,5 +141,7 @@ router.get("/accept", authToken, acceptFriends)
 router.get("/friend-list", authToken, listFriends)
 
 router.get("/chat-with-friend/:roomChatId", authToken, chatWithFriend)
-router.post("/get-one-friend",authToken,getOneFriend)
+router.post("/get-one-friend", authToken, getOneFriend)
+router.post("/location", authToken, locationMap)
+router.post("/google-login",googleLogin)
 module.exports = router
