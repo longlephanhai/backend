@@ -33,6 +33,7 @@ app.get("/", (req, res) => {
   res.send("API Working");
 });
 setupSocketEvents(io)
+
 connectDB().then(() => {
   // app.listen(PORT, () => {
   //     console.log("connect to DB")
